@@ -1,4 +1,5 @@
 # Individual
-practicing To make Different responsive App using Android Studio .
 
 language Used: Java
+
+The number of people tested for corona and infected and not infected person numbers.
