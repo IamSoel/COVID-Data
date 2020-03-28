@@ -1,6 +1,6 @@
 package com.example.tryandroid.di.modules;
 
-import com.example.tryandroid.MainActivity;
+import com.example.tryandroid.ui.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,7 +9,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBindingModule {
 
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract MainActivity contributesMainActivity();
 
 

@@ -1,12 +1,17 @@
-package com.example.tryandroid;
+package com.example.tryandroid.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tryandroid.databinding.ActivityMainBinding;
-import com.example.tryandroid.viewmodel.MainViewModel;
+import com.example.tryandroid.R;
+import com.example.tryandroid.databinding.FragmentNepalBinding;
+import com.example.tryandroid.viewmodel.NepalViewModel;
 import com.example.tryandroid.viewmodel.util.ViewModelFactory;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -18,20 +23,31 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import dagger.android.support.DaggerAppCompatActivity;
+import dagger.android.support.DaggerFragment;
 
-public class MainActivity extends DaggerAppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NepalFragment extends DaggerFragment {
+
     @Inject
     ViewModelFactory factory;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        MainViewModel mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
-        binding.setMain(mainViewModel);
+    public NepalFragment() {
+        // Required empty public constructor
+    }
 
-        mainViewModel.getNepalData().observe(this, nepalData -> {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        FragmentNepalBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_nepal, container, false);
+        NepalViewModel nepalViewModel = new ViewModelProvider(this, factory).get(NepalViewModel.class);
+        binding.setNepal(nepalViewModel);
+
+
+        nepalViewModel.getData().observe(this, nepalData -> {
             binding.testedPositive.setText(nepalData.getTestedPositive());
             binding.testedNegative.setText(nepalData.getTestedNegative());
             binding.testedTotal.setText(nepalData.getTestedTotal());
@@ -51,7 +67,6 @@ public class MainActivity extends DaggerAppCompatActivity {
             binding.pieChart.setDrawEntryLabels(false);
             binding.pieChart.getDescription().setEnabled(false);
 
-
             Legend legend = binding.pieChart.getLegend();
             legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
             legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
@@ -59,5 +74,7 @@ public class MainActivity extends DaggerAppCompatActivity {
             legend.setDrawInside(false);
 
         });
+        return binding.getRoot();
+
     }
 }

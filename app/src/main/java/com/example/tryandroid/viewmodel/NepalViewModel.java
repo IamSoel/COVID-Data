@@ -1,57 +1,57 @@
 package com.example.tryandroid.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.tryandroid.source.models.NepalDataModel;
 import com.example.tryandroid.source.repository.NepalDataRepository;
-import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainViewModel extends ViewModel {
+public class NepalViewModel extends ViewModel {
 
     private final NepalDataRepository nepalDataRepository;
+    private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<NepalDataModel> nepalData = new MutableLiveData<>();
 
     @Inject
-    public MainViewModel(NepalDataRepository nepalDataRepository) {
+    public NepalViewModel(NepalDataRepository nepalDataRepository) {
         this.nepalDataRepository = nepalDataRepository;
-        nepalData();
+
+        getNepalData();
     }
 
-    private void nepalData() {
+    private void getNepalData() {
         nepalDataRepository.getDataNepal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<NepalDataModel>() {
             @Override
             public void onSubscribe(Disposable d) {
+                disposable.add(d);
 
             }
 
             @Override
             public void onSuccess(NepalDataModel nepalDataModel) {
-                nepalData.postValue(nepalDataModel);
-                Log.d("NepalData", "onSuccess: " + new Gson().toJson(nepalDataModel));
+                if (nepalDataModel != null) {
+                    nepalData.postValue(nepalDataModel);
+                }
 
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("NepalData", "onSuccess: " + e.getMessage());
 
             }
         });
     }
 
-    public LiveData<NepalDataModel> getNepalData() {
+    public LiveData<NepalDataModel> getData() {
         return nepalData;
     }
-
 }
