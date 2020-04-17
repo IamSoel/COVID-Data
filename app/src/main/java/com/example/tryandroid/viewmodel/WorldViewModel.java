@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tryandroid.R;
 import com.example.tryandroid.source.models.WorldDataModel;
 import com.example.tryandroid.source.repository.NepalDataRepository;
+import com.example.tryandroid.ui.adapter.WorldRecyclerAdapter;
 
 import java.util.List;
 
@@ -24,11 +26,12 @@ public class WorldViewModel extends ViewModel {
     private final NepalDataRepository nepalDataRepository;
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<List<WorldDataModel>> worldData = new MutableLiveData<>();
+    private WorldRecyclerAdapter recyclerAdapter;
 
     @Inject
     public WorldViewModel(NepalDataRepository nepalDataRepository) {
         this.nepalDataRepository = nepalDataRepository;
-
+        this.recyclerAdapter = new WorldRecyclerAdapter(R.layout.world_recycler_layout, this);
         getWorldData();
     }
 
@@ -61,6 +64,21 @@ public class WorldViewModel extends ViewModel {
     }
 
     public LiveData<List<WorldDataModel>> getData() {
-        return worldData;
+        return this.worldData;
+    }
+
+    public WorldRecyclerAdapter getRecyclerAdapter() {
+        return this.recyclerAdapter;
+    }
+
+    public void setRecyclerAdapter(List<WorldDataModel> worldDataModel) {
+        this.recyclerAdapter.setDataList(worldDataModel);
+    }
+
+    public WorldDataModel getWorldDataItemAt(Integer position) {
+        if (this.worldData.getValue() != null && position != null) {
+            return this.worldData.getValue().get(position);
+        }
+        return null;
     }
 }

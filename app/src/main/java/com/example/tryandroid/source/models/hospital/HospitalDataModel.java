@@ -28,6 +28,7 @@ public class HospitalDataModel implements Serializable {
     @Expose
     private String page;
 
+
     public String getTotal() {
         return total;
     }
