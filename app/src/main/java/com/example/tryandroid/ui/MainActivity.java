@@ -6,10 +6,10 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.tryandroid.R;
 import com.example.tryandroid.databinding.ActivityMainBinding;
+import com.example.tryandroid.ui.fragments.AnimFragment;
 import com.example.tryandroid.ui.fragments.HospitalFragment;
 import com.example.tryandroid.ui.fragments.NepalFragment;
 import com.example.tryandroid.ui.fragments.WorldFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -20,7 +20,8 @@ public class MainActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.bottomNavigation.setItemIconTintList(null);
+        getSupportFragmentManager().beginTransaction().replace(R.id.displayFragment, new NepalFragment()).commit();
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
 
@@ -29,22 +30,30 @@ public class MainActivity extends DaggerAppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.displayFragment, new NepalFragment())
                             .commit();
+                   return true;
 
-                    break;
                 case R.id.world:
                     binding.toolbar.setTitle("World Corona Virus Data");
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.displayFragment, new WorldFragment())
                             .commit();
-                    break;
+                    return true;
 
                 case R.id.hospital:
                     binding.toolbar.setTitle("Isolation Beds");
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.displayFragment, new HospitalFragment())
                             .commit();
-                    break;
+                    return true;
+//                case R.id.anim:
+//                    binding.toolbar.setTitle("Anim");
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.displayFragment, new AnimFragment())
+//                            .commit();
+//                    break;
+
                 default:
+
                     break;
             }
 

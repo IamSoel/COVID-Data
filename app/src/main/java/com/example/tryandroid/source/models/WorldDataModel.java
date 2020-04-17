@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class WorldDataModel implements Serializable {
+
     @SerializedName("_id")
     @Expose
     private String id;

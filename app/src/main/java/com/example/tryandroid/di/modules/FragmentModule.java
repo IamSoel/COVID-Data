@@ -1,5 +1,6 @@
 package com.example.tryandroid.di.modules;
 
+import com.example.tryandroid.ui.fragments.AnimFragment;
 import com.example.tryandroid.ui.fragments.HospitalFragment;
 import com.example.tryandroid.ui.fragments.NepalFragment;
 import com.example.tryandroid.ui.fragments.WorldFragment;
@@ -18,4 +19,7 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract HospitalFragment contributesHospitalFragment();
+
+    @ContributesAndroidInjector
+    abstract AnimFragment contributesAnimFragment();
 }

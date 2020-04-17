@@ -68,8 +68,8 @@ public class NepalFragment extends DaggerFragment {
             binding.pieChart.getDescription().setEnabled(false);
 
             Legend legend = binding.pieChart.getLegend();
-            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+             legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
             legend.setOrientation(Legend.LegendOrientation.VERTICAL);
             legend.setDrawInside(false);
 

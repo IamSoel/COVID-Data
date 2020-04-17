@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Data implements Serializable {
 
@@ -87,6 +86,7 @@ public class Data implements Serializable {
     @SerializedName("email")
     @Expose
     private String email;
+
 
     public String getWebsite() {
         return website;

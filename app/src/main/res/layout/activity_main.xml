@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +16,6 @@
             android:background="@android:color/holo_red_dark"
             app:title="Nepal Corona Info"
             app:titleTextColor="@android:color/white" />
-
 
 
         <FrameLayout
@@ -33,10 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@android:color/white"
+            android:splitMotionEvents="true"
+            app:labelVisibilityMode="selected"
             app:backgroundTint="@android:color/holo_red_dark"
-            />
+            app:menu="@menu/bottom_nav_menu" />
 
 
     </RelativeLayout>
