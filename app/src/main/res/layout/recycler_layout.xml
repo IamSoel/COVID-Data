@@ -28,7 +28,6 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent"
                 android:background="@drawable/border"
                 android:orientation="vertical"
@@ -50,30 +49,23 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="100dp"
+                        android:gravity="center_vertical"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="end"
-                        android:orientation="horizontal">
+                        android:text="@{viewModel.getHospitaltemAt(position).address}"
+                        android:textSize="10sp"
+                        android:textStyle="italic" />
 
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@{viewModel.getHospitaltemAt(position).address}"
-                            android:textSize="15sp"
-                            android:textStyle="italic" />
-
-                        <ImageView
-                            android:id="@+id/dropDown"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="5dp"
-                            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/dropDown"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp" />
                 </LinearLayout>
 
                 <LinearLayout
